@@ -1,5 +1,6 @@
-```markdown
 
+
+```markdown
 # Weather Application
 
 A simple ASP.NET Core MVC application to display weather information for various cities. The project is organized into three main projects: Models, Service, and Service Contracts.
@@ -26,21 +27,49 @@ namespace Models
 ### 2. Service
 This project contains the business logic for fetching and processing weather data.
 
-#### Example Service
+#### CityWeatherService
 ```csharp
-namespace Service
+using ServiceContracts;
+using Models;
+
+namespace Services
 {
-    public class WeatherService : IWeatherService
+    public class CityWeatherService : ICityWeather
     {
-        public IEnumerable<CityWeather> GetCityWeathers()
+        private readonly List<CityWeather> cityWeathers;
+
+        public CityWeatherService()
         {
-            // Sample data
-            return new List<CityWeather>
+            cityWeathers = new List<CityWeather>()
             {
-                new CityWeather { CityUniqueCode = "LDN", CityName = "London", DateAndTime = DateTime.Now, TemperatureFahrenheit = 33 },
-                new CityWeather { CityUniqueCode = "NYC", CityName = "New York", DateAndTime = DateTime.Now, TemperatureFahrenheit = 60 },
-                new CityWeather { CityUniqueCode = "PAR", CityName = "Paris", DateAndTime = DateTime.Now, TemperatureFahrenheit = 82 },
+                new CityWeather
+                {
+                    CityUniqueCode = "LDN", CityName = "London", DateAndTime = Convert.ToDateTime("2030-01-01 8:00"), TemperatureFahrenheit = 33,
+                },
+                new CityWeather
+                {
+                    CityUniqueCode = "NYC", CityName = "London", DateAndTime = Convert.ToDateTime("2030-01-01 3:00"), TemperatureFahrenheit = 60
+                },
+                new CityWeather
+                {
+                    CityUniqueCode = "PAR", CityName = "Paris", DateAndTime = Convert.ToDateTime("2030-01-01 9:00"), TemperatureFahrenheit = 82,
+                }
             };
+        }
+
+        public List<CityWeather> GetCityWeathers()
+        {
+            return cityWeathers;
+        }
+
+        public CityWeather GetWeather(string cityCode)
+        {
+            if (cityCode == null)
+            {
+                return null;
+            }
+            CityWeather cityWeather = cityWeathers.Where(tmp => tmp.CityUniqueCode == cityCode).FirstOrDefault();
+            return cityWeather;
         }
     }
 }
@@ -49,13 +78,16 @@ namespace Service
 ### 3. Service Contracts
 This project contains the interfaces for the services used in the application.
 
-#### Example Service Contract
+#### ICityWeather Interface
 ```csharp
+using Models;
+
 namespace ServiceContracts
 {
-    public interface IWeatherService
+    public interface ICityWeather
     {
-        IEnumerable<CityWeather> GetCityWeathers();
+        List<CityWeather> GetCityWeathers();
+        CityWeather GetWeather(string cityCode);
     }
 }
 ```
@@ -63,7 +95,7 @@ namespace ServiceContracts
 ## Setup and Run
 
 ### Prerequisites
-- .NET 5.0 SDK or later
+- .NET 8.0 SDK or later
 - Visual Studio or any other C# compatible IDE
 
 ### Steps to Run
