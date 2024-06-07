@@ -102,7 +102,7 @@ namespace ServiceContracts
 
 1. **Clone the repository**
     ```sh
-    git clone https://github.com/yourusername/weather-app.git
+    [git clone https://github.com/MahmoodElbadri/WeatherAppWithDISolution.git]
     cd weather-app
     ```
 
