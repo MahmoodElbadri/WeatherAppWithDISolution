@@ -100,10 +100,10 @@ namespace ServiceContracts
 
 ### Steps to Run
 
-1. **Clone the repository**
+1.**Clone the repository**
     ```sh
-    [ (git clone https://github.com/MahmoodElbadri/WeatherAppWithDISolution.git) ]
-    cd weather-app
+    git clone https://github.com/MahmoodElbadri/WeatherAppWithDISolution.git
+    cd WeatherAppWithDISolution
     ```
 
 2. **Build the solution**
