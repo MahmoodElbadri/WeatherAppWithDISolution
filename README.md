@@ -1,6 +1,6 @@
 
 
-```markdown
+
 # Weather Application
 
 A simple ASP.NET Core MVC application to display weather information for various cities. The project is organized into three main projects: Models, Service, and Service Contracts.
